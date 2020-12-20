@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val pbLoading = findViewById<ProgressBar>(R.id.pbLoading)
+        //View progress dialogue before calling the url
         pbLoading.visibility= View.VISIBLE
         val mSharedPrefManager = SharedPrefManager(applicationContext)
         if (isNetworkAvailable()) {
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
         pbLoading.visibility= View.GONE
     }
-
+    //To ignore any word that has special char
     private fun validateString(str: String): Boolean {
         var str = str
         str = str.toLowerCase(Locale.ROOT)
@@ -62,12 +63,14 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+    //Check network connection
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
         return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
+    //To claculate words...
     private fun calculateWords(string:String){
         val words1: ArrayList<String>?
         words1 = ArrayList()
